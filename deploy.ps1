@@ -102,7 +102,23 @@ if ($env:IN_PLACE_DEPLOYMENT -ne "1") {
 
 exitWithMessageOnError "MSBuild failed"
 
-# 3. KuduSync
+# 3. Download test framework if necessary
+if (-not(test-path "$pwd\src\packages\NUnit.ConsoleRunner*")) {
+  nuget install NUnit.ConsoleRunner -OutputDirectory "$pwd\src\packages"
+}
+
+# 4. Build the test project
+& "$MSBUILD_PATH" "$DEPLOYMENT_SOURCE\src\Bredvid.Blog.KuduDeploy.Tests\Bredvid.Blog.KuduDeploy.Tests.csproj" /nologo /verbosity:m /t:Build /p:AutoParameterizationWebConfigConnectionStrings=false`;Configuration=Release`;UseSharedCompilation=false /p:SolutionDir="$DEPLOYMENT_SOURCE\src\\" $env:SCM_BUILD_ARGS
+
+exitWithMessageOnError "MSBuild failed"
+
+# 5. Run the tests
+
+& "$DEPLOYMENT_SOURCE\src\packages\NUnit.ConsoleRunner*\tools\nunit3-console.exe" "$DEPLOYMENT_SOURCE\src\Bredvid.Blog.KuduDeploy.Tests\bin\Release\Bredvid.Blog.KuduDeploy.Tests.dll" -v
+
+exitWithMessageOnError "Tests failed"
+
+# 6. KuduSync
 if ($env:IN_PLACE_DEPLOYMENT -ne "1") {
   & $KUDU_SYNC_CMD -v 50 -f "$DEPLOYMENT_TEMP" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.ps1"
   exitWithMessageOnError "Kudu Sync failed"
