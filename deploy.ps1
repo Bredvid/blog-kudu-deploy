@@ -125,7 +125,7 @@ if ($env:IN_PLACE_DEPLOYMENT -ne "1") {
 }
 
 # 7. Check application
-$pingUri = "https://$WEBSITE_HOSTNAME"
+$pingUri = "https://$($env:WEBSITE_HOSTNAME)"
 echo "Checking $pingUri"
 $result = Invoke-WebRequest "$pingUri"
 if ($result.StatusCode / 100 -ne 2) {
