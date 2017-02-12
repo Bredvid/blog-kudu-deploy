@@ -124,8 +124,13 @@ if ($env:IN_PLACE_DEPLOYMENT -ne "1") {
   exitWithMessageOnError "Kudu Sync failed"
 }
 
-
-dir env:
+# 7. Check application
+$pingUri = "https://$WEBSITE_HOSTNAME"
+echo "Checking $pingUri"
+$result = Invoke-WebRequest "$pingUri"
+if ($result.StatusCode / 100 -ne 2) {
+  exitWithMessageOnError "Contacting endpoint $pingUri failed with $($result.StatusCode) $($result.StatusDescription)"  
+}
 
 ##################################################################################################################################
 echo "Finished successfully."
