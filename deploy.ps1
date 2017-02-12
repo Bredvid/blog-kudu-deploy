@@ -124,5 +124,8 @@ if ($env:IN_PLACE_DEPLOYMENT -ne "1") {
   exitWithMessageOnError "Kudu Sync failed"
 }
 
+
+dir env:
+
 ##################################################################################################################################
 echo "Finished successfully."
