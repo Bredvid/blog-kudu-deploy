@@ -126,6 +126,7 @@ if ($env:IN_PLACE_DEPLOYMENT -ne "1") {
 }
 
 # 7. Check application
+$ErrorActionPreference = 'stop'
 $pingUri = "https://$($env:WEBSITE_HOSTNAME)"
 echo "Checking $pingUri"
 $result = Invoke-WebRequest "$pingUri" -UseBasicParsing
