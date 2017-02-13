@@ -1,3 +1,4 @@
+$ProgressPreference = 'SilentlyContinue'
 
 # ----------------------
 # KUDU Deployment Script
