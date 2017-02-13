@@ -131,7 +131,7 @@ $pingUri = "https://$($env:WEBSITE_HOSTNAME)"
 echo "Checking $pingUri"
 $result = Invoke-WebRequest "$pingUri" -UseBasicParsing
 if ($result.StatusCode / 100 -ne 2) {
-  exitWithMessageOnError "Contacting endpoint $pingUri failed with $($result.StatusCode) $($result.StatusDescription)"  
+  Write-error "Contacting endpoint $pingUri failed with $($result.StatusCode) $($result.StatusDescription)"  
 }
 
 ##################################################################################################################################
