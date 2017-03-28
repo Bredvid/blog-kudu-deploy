@@ -1,0 +1,16 @@
+{
+"id": "005c554bbeeaac0000000000000000000001",
+"status": "success",
+"statusText": "",
+"authorEmail": "vidar.kongsli@bredvid.no",
+"author": "Vidar Kongsli",
+"message": "An informative commit message (as always)",
+"progress": "",
+"deployer": "who triggered the deployment",
+"receivedTime": "2016-05-12T23:45:17.4767323Z",
+"startTime": "2016-05-12T23:58:42.0723693Z",
+"endTime": "2016-05-12T23:58:53.7723895Z",
+"lastSuccessEndTime": "2016-05-12T23:58:53.7723895Z",
+"complete": true,
+"siteName": "bredvid-blog.scm.azurewebsites.net"
+}
