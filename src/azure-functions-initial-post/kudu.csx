@@ -11,7 +11,7 @@ public class KuduDeployResult
     public string Deployer { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
-    public DateTime ReceviedTime { get; set; }
+    public DateTime ReceivedTime { get; set; }
     public DateTime LastSuccessEndTime { get; set; }
     public bool Complete { get; set; }
     public string SiteName { get; set; }
